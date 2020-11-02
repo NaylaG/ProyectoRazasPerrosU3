@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="Estilosprueba.css" rel="stylesheet" />
+    <title>
+        Razas de Perros
+    </title>
+</head>
+<body>
+    <header>
+        <h1><a href="~/Home/">Razas de Perros</a></h1>
+    </header>
+    <main class="main">
+        <h2>Eliminar</h2>
+        <form>
+
+            <div class="eliminar">
+                <input type="hidden" id="Id" name="Id" />
+                <p>¿Está seguro de eliminar la raza "<span id="nombreCategoria">Chihuahua</span>"?</p>
+                <div class="botones">
+
+                    <div>
+                        <input type="submit" value="Si" id="btnSi" class="button" />
+                        <a href="#">
+                            <input type="button" value="No" id="btnNo" formnovalidate="formnovalidate" class="button" />
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+    </main>
+    <footer>
+        Razas de Perros - Ejercicio de Programación Web
+    </footer>
+</body>
+</html>
