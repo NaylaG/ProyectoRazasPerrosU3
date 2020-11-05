@@ -1,68 +1,52 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <link href="~/estilos.css" rel="stylesheet" />
-    <title>Agregar</title>
-</head>
-<body>
-    <header>
-        <h1><a href="~/Home/">Razas de Perros</a></h1>
-    </header>
-    <main class="main">
-        <form>
-            <h2>Editar</h2>
-            <div class="razaAgregar">
+﻿@{
+    Layout = "_Layout";
+}
+    <form method="post" asp-action="Editar" asp-area="Admin" asp-controller="Home">
+    <h2>Editar</h2>
+    <div class="razaAgregar">
+        <input type="hidden" id="Id" name="Id" />
+        <h3 class="subtitulo">Datos</h3>
+        <label>Nombre:</label><input type="text" placeholder="Nombre" />
+        <label>Otros nombres:</label><input type="text" placeholder="Otros Nombres" />
+        <label>Descripcion:</label><textarea placeholder="Descripcion"></textarea>
+        <label>País de Origen:</label><input type="text" placeholder="País de Origen" />
+        <label>Peso:</label><input type="number" placeholder="Peso" />
+        <label>Altura:</label><input type="number" placeholder="Altura" />
+        <label>Esperanza de vida:</label><input type="text" placeholder="Esperanza de vida" />
 
-                <h3 class="subtitulo">Datos</h3>
-                <label>Nombre:</label><input type="text" placeholder="Nombre" />
-                <label>Otros nombres:</label><input type="text" placeholder="Otros Nombres" />
-                <label>Descripcion:</label><textarea placeholder="Descripcion"></textarea>
-                <label>País de Origen:</label><input type="text" placeholder="País de Origen" />
-                <label>Peso:</label><input type="number" placeholder="Peso" />
-                <label>Altura:</label><input type="number" placeholder="Altura" />
-                <label>Esperanza de vida:</label><input type="text" placeholder="Esperanza de vida" />
-
-                <h3 class="subtitulo">Estadísticas</h3>
-                <label>Nivel de energía:</label><input type="range" min="0" max="10" value="5" />
-                <label>Facilidad de Entrenamiento:</label><input type="range" min="0" max="10" value="5" />
-                <label>Amistad con Desconocidos:</label><input type="range" min="0" max="10" value="5" />
-                <label>Amistad con Perros:</label><input type="range" min="0" max="10" value="5" />
-                <label>Necesidad de Cepillado:</label><input type="range" min="0" max="10" value="5" />
+        <h3 class="subtitulo">Estadísticas</h3>
+        <label>Nivel de energía:</label><input type="range" min="0" max="10" value="5" />
+        <label>Facilidad de Entrenamiento:</label><input type="range" min="0" max="10" value="5" />
+        <label>Amistad con Desconocidos:</label><input type="range" min="0" max="10" value="5" />
+        <label>Amistad con Perros:</label><input type="range" min="0" max="10" value="5" />
+        <label>Necesidad de Cepillado:</label><input type="range" min="0" max="10" value="5" />
 
 
-                <h3 class="subtitulo">Caracteristicas Físicas</h3>
-                <label>Patas:</label><input type="text" placeholder="Patas" />
-                <label>Cola:</label><input type="text" placeholder="Cola" />
-                <label>Hocico:</label><input type="number" placeholder="Hocico" />
-                <label>Pelo:</label><input type="number" placeholder="Pelo" />
-                <label>Color:</label><input type="text" placeholder="Color" />
-                <label>Imagen:</label>
-                <input type="file" />
-                <img src="imgs/no-disponible.png" />
+        <h3 class="subtitulo">Caracteristicas Físicas</h3>
+        <label>Patas:</label><input type="text" placeholder="Patas" />
+        <label>Cola:</label><input type="text" placeholder="Cola" />
+        <label>Hocico:</label><input type="number" placeholder="Hocico" />
+        <label>Pelo:</label><input type="number" placeholder="Pelo" />
+        <label>Color:</label><input type="text" placeholder="Color" />
+        <label>Imagen:</label>
+        <input type="file" />
+        <img src="imgs/no-disponible.png" />
 
-                <div class="botones">
-                    <p id="error">
+        <div class="botones">
+            <p id="error">
 
-                    </p>
-                    <div>
-                        <input type="submit" value="Aceptar" class="button" />
-                        <a href="#">
-                            <input type="button" value="Cancelar" formnovalidate="formnovalidate" class="button" />
-                        </a>
-                    </div>
-
-                </div>
-
-
+            </p>
+            <div>
+                <input type="submit" value="Aceptar" class="button" />
+                <a href="~/Admin/Home/Index">
+                    <input type="button" value="Cancelar" formnovalidate="formnovalidate" class="button" />
+                </a>
             </div>
 
+        </div>
 
-        </form>
-    </main>
 
-    <footer>
-        Razas de Perros - Ejercicio de Programación Web
-    </footer>
-</body>
-</html>
+    </div>
+
+
+</form>
