@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ProyectoRazasPerrosU3.Models.ViewModels.RazasPaisViewModel
+@{
     Layout = "_Layout";
 }
 
@@ -10,82 +11,23 @@
 </section>
 
 <section class="list">
-    <h4>GRAN BRETAÑA</h4>
-    <ul>
-        <li>
-            <a href="/Home/InfoPerro/">
-                <img src="/imgs_perros/80_0.jpg" />
-                Golden Retriever
-            </a>
-        </li>
-        <li>
-            <a href="/Home/InfoPerro/">
-                <img src="/imgs_perros/80_0.jpg" />
-                Golden Retriever
-            </a>
-        </li>
-        <li>
-            <a href="/Home/InfoPerro/">
-                <img src="/imgs_perros/80_0.jpg" />
-                Golden Retriever
-            </a>
-        </li>
-        <li>
-            <a href="/Home/InfoPerro/">
-                <img src="/imgs_perros/80_0.jpg" />
-                Golden Retriever
-            </a>
-        </li>
-        <li>
-            <a href="/Home/InfoPerro/">
-                <img src="/imgs_perros/80_0.jpg" />
-                Golden Retriever
-            </a>
-        </li>
-        <li>
-            <a href="/Home/InfoPerro/">
-                <img src="/imgs_perros/80_0.jpg" />
-                Golden Retriever
-            </a>
-        </li>
-    </ul>
-    <h4>GRAN BRETAÑA</h4>
-    <ul>
-        <li>
-            <a href="/Home/InfoPerro/">
-                <img src="/imgs_perros/80_0.jpg" />
-                Golden Retriever
-            </a>
-        </li>
-        <li>
-            <a href="/Home/InfoPerro/">
-                <img src="/imgs_perros/80_0.jpg" />
-                Golden Retriever
-            </a>
-        </li>
-        <li>
-            <a href="/Home/InfoPerro/">
-                <img src="/imgs_perros/80_0.jpg" />
-                Golden Retriever
-            </a>
-        </li>
-        <li>
-            <a href="/Home/InfoPerro/">
-                <img src="/imgs_perros/80_0.jpg" />
-                Golden Retriever
-            </a>
-        </li>
-        <li>
-            <a href="/Home/InfoPerro/">
-                <img src="/imgs_perros/80_0.jpg" />
-                Golden Retriever
-            </a>
-        </li>
-        <li>
-            <a href="/Home/InfoPerro/">
-                <img src="/imgs_perros/80_0.jpg" />
-                Golden Retriever
-            </a>
-        </li>
-    </ul>
+    @foreach (var item in Model.Paises.OrderBy(x=>x.Nombre))
+    {
+        <h4>@item.Nombre</h4>
+        <ul>
+            @foreach (var r in item.Razas)
+            {
+                <li>
+                    <a href="/Home/InfoPerro/">
+                        <img src="/imgs_perros/@(r.Id)_0.jpg" />
+                        @r.Nombre
+                    </a>
+                </li>
+            }
+
+        </ul>
+    }
+
+
+
 </section>

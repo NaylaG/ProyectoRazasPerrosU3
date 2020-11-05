@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ProyectoRazasPerrosU3.Models;
 using ProyectoRazasPerrosU3.Models.ViewModels;
 using ProyectoRazasPerrosU3.Repositories;
 
@@ -40,7 +42,13 @@ namespace ProyectoRazasPerrosU3.Controllers
         }
         public IActionResult RazasPorPais()
         {
-            return View();
+            sistem14_razasContext context = new sistem14_razasContext();
+            RazasPaisViewModel vm = new RazasPaisViewModel();
+           // Razas r = new Razas();
+             vm.Paises= context.Paises.Include(x=>x.Razas);
+            
+
+            return View(vm);
         }
     }
 }
