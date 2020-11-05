@@ -1,4 +1,4 @@
-﻿@model ProyectoRazasPerrosU3.Models.ViewModels.RazasPaisViewModel
+﻿@model ProyectoRazasPerrosU3.Models.ViewModels.RazaViewModel
 @{
     Layout = "_Layout";
 }
@@ -18,7 +18,7 @@
             @foreach (var r in item.Razas)
             {
                 <li>
-                    <a href="/Home/InfoPerro/">
+                    <a href="/Raza/@r.Nombre">
                         <img src="/imgs_perros/@(r.Id)_0.jpg" />
                         @r.Nombre
                     </a>

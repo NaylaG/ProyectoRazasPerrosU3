@@ -9,5 +9,7 @@ namespace ProyectoRazasPerrosU3.Models.ViewModels
     {
         public uint Id { get; set; }
         public string Nombre { get; set; }
+        public IEnumerable<Paises> Paises { get; set; }
+
     }
 }
