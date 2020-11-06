@@ -2,11 +2,12 @@
 @{
     Layout = "_Layout";
 }
-<form method="post" asp-action="Agregar" asp-area="Admin" asp-controller="Home">
+<form method="post" asp-action="Agregar" asp-area="Admin" asp-controller="Home" enctype="multipart/form-data">
     <h2>Agregar</h2>
     <div class="razaAgregar">
-       
+
         <h3 class="subtitulo">Datos</h3>
+        <label>ID:</label><input asp-for="Id" type="text" placeholder="ID" required />
         <label>Nombre:</label><input asp-for="Nombre" type="text" placeholder="Nombre" />
         <label>Otros nombres:</label><input asp-for="OtrosNombres" type="text" placeholder="Otros Nombres" />
         <label>Descripcion:</label><textarea asp-for="Descripcion" placeholder="Descripcion"></textarea>
@@ -26,12 +27,12 @@
         <h3 class="subtitulo">Caracteristicas Físicas</h3>
         <label>Patas:</label><input asp-for="Caracteristicasfisicas.Patas" type="text" placeholder="Patas" />
         <label>Cola:</label><input asp-for="Caracteristicasfisicas.Cola" type="text" placeholder="Cola" />
-        <label>Hocico:</label><input asp-for="Caracteristicasfisicas.Hocico" type="number" placeholder="Hocico" />
-        <label>Pelo:</label><input asp-for="Caracteristicasfisicas.Pelo" type="number" placeholder="Pelo" />
+        <label>Hocico:</label><input asp-for="Caracteristicasfisicas.Hocico" type="text" placeholder="Hocico" />
+        <label>Pelo:</label><input asp-for="Caracteristicasfisicas.Pelo" type="text" placeholder="Pelo" />
         <label>Color:</label><input asp-for="Caracteristicasfisicas.Color" type="text" placeholder="Color" />
         <label>Imagen:</label>
         <input type="file" />
-        <img src="imgs/no-disponible.png" />
+        <img src="~/imgs/no-disponible.png" />
 
         <div class="botones">
             <p id="error">
@@ -51,3 +52,15 @@
 
 
 </form>
+
+<script>
+    function mostrarImagen(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById("imagePreview").src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
