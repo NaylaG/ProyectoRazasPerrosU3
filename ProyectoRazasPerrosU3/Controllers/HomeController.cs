@@ -12,9 +12,18 @@ namespace ProyectoRazasPerrosU3.Controllers
 {
     public class HomeController : Controller
     {
+        sistem14_razasContext context;
+      
+        public HomeController(sistem14_razasContext ctx)
+        {
+            context = ctx;
+         
+        }
         public IActionResult Index(string id)
         {
-            RazasRepository repos = new RazasRepository();
+
+
+            RazasRepository repos = new RazasRepository(context);
             IndexViewModel vm = new IndexViewModel
             {
                 Razas = id == null ? repos.GetRazas() : repos.GetRazasByLetraInicial(id),
@@ -26,7 +35,7 @@ namespace ProyectoRazasPerrosU3.Controllers
         [Route("Raza/{id}")]
         public IActionResult InfoPerro(string id)
         {
-            RazasRepository repos = new RazasRepository();
+            RazasRepository repos = new RazasRepository(context);
             InfoPerroViewModel vm = new InfoPerroViewModel();
             vm.Raza = repos.GetRazaByNombre(id);
 
