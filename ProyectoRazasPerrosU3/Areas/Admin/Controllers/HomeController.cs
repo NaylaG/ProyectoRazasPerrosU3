@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoRazasPerrosU3.Models;
+using ProyectoRazasPerrosU3.Models.ViewModels;
 using ProyectoRazasPerrosU3.Repositories;
 
 
@@ -28,24 +30,48 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
         }
         public IActionResult Agregar()
         {
-            Razas r = new Razas();
-
-            return View(r);
+            InfoPerroViewModel vm = new InfoPerroViewModel();
+           
+            return View(vm);
         }
 
         [HttpPost]
-        public IActionResult Agregar(Razas r)
+        public IActionResult Agregar(InfoPerroViewModel vm)
         {
             try
             {
+                if(vm.Archivo==null)
+                {
+                    ModelState.AddModelError("", "Debe seleccionar una imagen para la raza");
+                    return View(vm);
+                }
+                else
+                {
+                    if (vm.Archivo.ContentType != "image/jpeg" || vm.Archivo.Length > 1024 * 1024 * 2)
+                    {
+                        ModelState.AddModelError("", "Debe seleccionar un archivo jpg menor a 2MB");
+                      
+                        return View(vm);
+                    }
+                }
+               
                 Repository<Razas> repos = new Repository<Razas>(context);
-                repos.Insert(r);
+                
+                repos.Insert(vm.Raza);
+                if (vm.Archivo != null)
+                {
+                    FileStream fs = new FileStream(Enviroment.WebRootPath + "/imgs_perros/" + vm.Raza.Id + "_0.jpg", FileMode.Create);
+                    vm.Archivo.CopyTo(fs);
+                    fs.Close();
+                }
+
+
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception error)
             {
                 ModelState.AddModelError("",error.Message);
-                return View(r);
+                return View(vm);
             }
            
         }
