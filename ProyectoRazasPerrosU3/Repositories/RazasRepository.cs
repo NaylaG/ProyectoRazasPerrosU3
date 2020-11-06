@@ -32,8 +32,10 @@ namespace ProyectoRazasPerrosU3.Repositories
 
         public IEnumerable<char> GetLetrasIniciales()
         {
+        
             return context.Razas
-                .OrderBy(x => x.Nombre).Select(x => x.Nombre.First()).Distinct();
+             .OrderBy(x => x.Nombre)
+             .Select(x => x.Nombre.First());
         }
 
         public Razas GetRazaByNombre(string nombre)
@@ -49,10 +51,11 @@ namespace ProyectoRazasPerrosU3.Repositories
         {
             nombre = nombre.Replace("-", " ");
             Random r = new Random();
-            var num = r.Next();
+            
             return context.Razas
                 .Where(x => x.Nombre != nombre)
-                .OrderBy(x => num)
+                .ToList()
+                .OrderBy(x => r.Next())
                 .Take(4)
                 .Select(x => new RazaViewModel { Id = x.Id, Nombre = x.Nombre });
         }
