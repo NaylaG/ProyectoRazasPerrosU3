@@ -40,6 +40,7 @@ namespace ProyectoRazasPerrosU3.Controllers
                 return View(vm);
             }
         }
+        [Route("/RazasPorPais")]
         public IActionResult RazasPorPais()
         {
             sistem14_razasContext context = new sistem14_razasContext();
