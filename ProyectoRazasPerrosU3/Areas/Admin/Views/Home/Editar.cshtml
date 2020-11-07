@@ -1,40 +1,45 @@
-﻿@{
+﻿@model ProyectoRazasPerrosU3.Models.ViewModels.InfoPerroViewModel 
+@{
     Layout = "_Layout";
 }
-    <form method="post" asp-action="Editar" asp-area="Admin" asp-controller="Home">
+    <form method="post" asp-action="Editar" asp-area="Admin" asp-controller="Home" enctype="multipart/form-data">
     <h2>Editar</h2>
     <div class="razaAgregar">
         <input type="hidden" id="Id" name="Id" />
         <h3 class="subtitulo">Datos</h3>
-        <label>Nombre:</label><input type="text" placeholder="Nombre" />
-        <label>Otros nombres:</label><input type="text" placeholder="Otros Nombres" />
-        <label>Descripcion:</label><textarea placeholder="Descripcion"></textarea>
-        <label>País de Origen:</label><input type="text" placeholder="País de Origen" />
-        <label>Peso:</label><input type="number" placeholder="Peso" />
-        <label>Altura:</label><input type="number" placeholder="Altura" />
-        <label>Esperanza de vida:</label><input type="text" placeholder="Esperanza de vida" />
+        <label>Nombre:</label><input asp-for="Raza.Nombre" type="text" placeholder="Nombre" required />
+        <label>Otros nombres:</label><input asp-for="Raza.OtrosNombres" type="text" placeholder="Otros Nombres" required />
+        <label>Descripcion:</label><textarea asp-for="Raza.Descripcion" placeholder="Descripcion" required></textarea>
+        <label>País de Origen:</label><select asp-for="Raza.IdPais" asp-items="@(new SelectList(Model.Paises, "Id", "Nombre"))" required="required">
+        <option selected="selected" value="">-- Seleccionar país de origen --</option>
+        </select>
+        <label>Peso mínimo:</label><input asp-for="Raza.PesoMin" type="number" placeholder="Peso Minimo" required/>
+        <label>Peso máximo:</label><input asp-for="Raza.PesoMax" type="number" placeholder="Peso máximo" required/>
+        <label>Altura mínima:</label><input asp-for="Raza.AlturaMin" type="number" placeholder="Altura mínima" required/>
+        <label>Altura máxima:</label><input asp-for="Raza.AlturaMax" type="number" placeholder="Altura máxima" required/>
+        <label>Esperanza de vida:</label><input asp-for="Raza.EsperanzaVida" type="text" placeholder="Esperanza de vida" required/>
 
         <h3 class="subtitulo">Estadísticas</h3>
-        <label>Nivel de energía:</label><input type="range" min="0" max="10" value="5" />
-        <label>Facilidad de Entrenamiento:</label><input type="range" min="0" max="10" value="5" />
-        <label>Amistad con Desconocidos:</label><input type="range" min="0" max="10" value="5" />
-        <label>Amistad con Perros:</label><input type="range" min="0" max="10" value="5" />
-        <label>Necesidad de Cepillado:</label><input type="range" min="0" max="10" value="5" />
+        <label>Nivel de energía:</label><input asp-for="Raza.Estadisticasraza.NivelEnergia" type="range" min="0" max="10" value="5" required/>
+        <label>Facilidad de Entrenamiento:</label><input asp-for="Raza.Estadisticasraza.FacilidadEntrenamiento" type="range" min="0" max="10" value="5" required/>
+        <label>Amistad con Desconocidos:</label><input asp-for="Raza.Estadisticasraza.AmistadDesconocidos" type="range" min="0" max="10" value="5" required/>
+        <label>Amistad con Perros:</label><input asp-for="Raza.Estadisticasraza.AmistadPerros" type="range" min="0" max="10" value="5" required/>
+        <label>Necesidad de Cepillado:</label><input asp-for="Raza.Estadisticasraza.NecesidadCepillado" type="range" min="0" max="10" value="5" required/>
 
 
         <h3 class="subtitulo">Caracteristicas Físicas</h3>
-        <label>Patas:</label><input type="text" placeholder="Patas" />
-        <label>Cola:</label><input type="text" placeholder="Cola" />
-        <label>Hocico:</label><input type="number" placeholder="Hocico" />
-        <label>Pelo:</label><input type="number" placeholder="Pelo" />
-        <label>Color:</label><input type="text" placeholder="Color" />
+        <label>Patas:</label><input asp-for="Raza.Caracteristicasfisicas.Patas" type="text" placeholder="Patas" required />
+        <label>Cola:</label><input asp-for="Raza.Caracteristicasfisicas.Cola" type="text" placeholder="Cola" required/>
+        <label>Hocico:</label><input asp-for="Raza.Caracteristicasfisicas.Hocico" type="number" placeholder="Hocico" required/>
+        <label>Pelo:</label><input asp-for="Raza.Caracteristicasfisicas.Pelo" type="number" placeholder="Pelo" required />
+        <label>Color:</label><input asp-for="Raza.Caracteristicasfisicas.Color" type="text" placeholder="Color" required />
         <label>Imagen:</label>
-        <input type="file" />
-        <img src="~/imgs/no-disponible.png" />
+        <input type="file" id="fileUpload1" accept="image/jpg" onchange="mostrarImagen(this)" asp-for="Archivo" required />
+        <img id="imagePreview" src="~/imgs_perros/@(Model.Raza.Id)_0.jpg" alt="Vista previa de la imagen" />
 
         <div class="botones">
             <p id="error">
-
+                @Html.ValidationSummary()
             </p>
             <div>
                 <input type="submit" value="Aceptar" class="button" />
@@ -42,11 +47,18 @@
                     <input type="button" value="Cancelar" formnovalidate="formnovalidate" class="button" />
                 </a>
             </div>
-
         </div>
-
-
     </div>
-
-
 </form>
+
+    <script>
+    function mostrarImagen(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.querySelector('#imagePreview').src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    </script>

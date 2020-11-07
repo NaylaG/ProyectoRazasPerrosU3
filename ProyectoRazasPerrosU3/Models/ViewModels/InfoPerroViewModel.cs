@@ -12,5 +12,7 @@ namespace ProyectoRazasPerrosU3.Models.ViewModels
         public IEnumerable<RazaViewModel> OtrasRazas { get; set; }
         public IFormFile Archivo { get; set; }
         public string Imagen { get; set; }
+
+        public IEnumerable<Paises> Paises { get; set; }
     }
 }

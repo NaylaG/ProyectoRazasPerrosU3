@@ -1,12 +1,12 @@
-﻿@{
+﻿@model ProyectoRazasPerrosU3.Models.ViewModels.InfoPerroViewModel
+@{
     Layout = "_Layout";
 }
 <h2>Eliminar</h2>
 <form method="post" asp-action="Eliminar" asp-area="Admin" asp-controller="Home" >
-
     <div class="eliminar">
         <input type="hidden" id="Id" name="Id" />
-        <p>¿Está seguro de eliminar la raza "<span id="nombreCategoria">Chihuahua</span>"?</p>
+        <p>¿Está seguro de eliminar la raza "<span id="nombreCategoria">@Model.Raza.Nombre</span>"?</p>
         <div class="botones">
             <div>
                 <input type="submit" value="Si" id="btnSi" class="button" />
@@ -14,7 +14,6 @@
                     <input type="button" value="No" id="btnNo" formnovalidate="formnovalidate" class="button" />
                 </a>
             </div>
-
         </div>
     </div>
 </form>
