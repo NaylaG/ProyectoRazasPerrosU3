@@ -82,8 +82,8 @@ namespace ProyectoRazasPerrosU3.Repositories
             { throw new Exception("Debe indicar si existen otros nombres de la raza"); }
             if (string.IsNullOrEmpty(entidad.Descripcion))
             { throw new Exception("Debe ingresar la descripcion de la raza"); }
-            if (Context.Paises.Any(x=>x.Id==entidad.IdPais))
-            { throw new Exception("Debe seleccionar un pais de origen de la raza valido"); }
+            //if (Context.Paises.Any(x=>x.Id==entidad.IdPais))
+            //{ throw new Exception("Debe seleccionar un pais de origen de la raza valido"); }
 
             if(entidad==null ||  entidad.PesoMax<=0)
             { throw new Exception("Debe ingresar un peso maximo valido para la raza"); }

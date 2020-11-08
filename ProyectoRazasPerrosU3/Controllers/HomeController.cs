@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using ProyectoRazasPerrosU3.Models;
 using ProyectoRazasPerrosU3.Models.ViewModels;
@@ -19,6 +20,10 @@ namespace ProyectoRazasPerrosU3.Controllers
             context = ctx;
          
         }
+
+        [Route("ABC_RAZAS/{id}")]
+        [Route("/index")]
+        [Route("/")]
         public IActionResult Index(string id)
         {
 
