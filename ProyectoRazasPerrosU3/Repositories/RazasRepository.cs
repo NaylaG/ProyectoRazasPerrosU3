@@ -19,12 +19,16 @@ namespace ProyectoRazasPerrosU3.Repositories
         }
         public IEnumerable<RazaViewModel> GetRazas()
         {
-            return Context.Razas.OrderBy(x => x.Nombre)
+            return Context.Razas.OrderBy(x => x.Nombre).Where(x => x.Eliminado==0)
                 .Select(x => new RazaViewModel
                 {
                     Id = x.Id,
                     Nombre = x.Nombre
                 });
+        }
+        public override IEnumerable<Razas> GetAll()
+        {
+            return base.GetAll().OrderBy(x=>x.Nombre);
         }
 
         public IEnumerable<RazaViewModel> GetRazasByLetraInicial(string letra)
@@ -38,7 +42,7 @@ namespace ProyectoRazasPerrosU3.Repositories
         
             return Context.Razas
              .OrderBy(x => x.Nombre)
-             .Select(x => x.Nombre.First()).Distinct();
+             .Select(x => x.Nombre.First());
         }
 
         public Razas GetRazaByNombre(string nombre)
@@ -48,6 +52,11 @@ namespace ProyectoRazasPerrosU3.Repositories
                 .Include(x => x.Caracteristicasfisicas)
                 .Include(x => x.IdPaisNavigation)
                 .FirstOrDefault(x => x.Nombre == nombre);
+        }
+
+        public override Razas GetById(object id)
+        {
+            return Context.Razas.Include(x => x.IdPaisNavigation).Include(x=>x.Estadisticasraza).Include(x=>x.Caracteristicasfisicas).FirstOrDefault(x => x.Id == (uint)id);
         }
 
         public IEnumerable<RazaViewModel> Get4RandomRazasExcept(string nombre)
@@ -105,9 +114,17 @@ namespace ProyectoRazasPerrosU3.Repositories
             { throw new Exception("Debe ingresar las caracteristicas del pelo de la raza"); }
             if (string.IsNullOrEmpty(entidad.Caracteristicasfisicas.Color))
             { throw new Exception("Debe ingresar las caracteristicas del color de la raza"); }
-     
 
 
+            if (Context.Razas.Any(x => x.Nombre == entidad.Nombre && x.Id != entidad.Id))
+            {
+                throw new Exception("Ya existe una raza registrada con el mismo nombre");
+            }
+
+            if (!Context.Paises.Any(x => x.Id == entidad.IdPais))
+            {
+                throw new Exception("No existe el pais especificado");
+            }
 
 
 

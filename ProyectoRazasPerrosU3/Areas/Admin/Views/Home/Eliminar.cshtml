@@ -1,14 +1,17 @@
-﻿@model ProyectoRazasPerrosU3.Models.ViewModels.InfoPerroViewModel
+﻿@model ProyectoRazasPerrosU3.Models.Razas
 @{
     Layout = "_Layout";
 }
 <h2>Eliminar</h2>
 <form method="post" asp-action="Eliminar" asp-area="Admin" asp-controller="Home" >
     <div class="eliminar">
-        <input type="hidden" id="Id" name="Id" />
-        <p>¿Está seguro de eliminar la raza "<span id="nombreCategoria">@Model.Raza.Nombre</span>"?</p>
+        <input type="hidden" id="Id" name="Id" value="@Model.Id"/>
+        <p>¿Está seguro de eliminar la raza "<span id="nombreCategoria">@Model.Nombre</span>"?</p>
         <div class="botones">
             <div>
+                <p id="error">
+                    @Html.ValidationSummary()
+                </p>
                 <input type="submit" value="Si" id="btnSi" class="button" />
                 <a href="~/Admin/Home/Index">
                     <input type="button" value="No" id="btnNo" formnovalidate="formnovalidate" class="button" />

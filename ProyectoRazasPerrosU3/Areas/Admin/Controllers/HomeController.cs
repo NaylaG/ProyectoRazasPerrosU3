@@ -26,9 +26,9 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            Repository<Razas> repos = new Repository<Razas>(context);
+            RazasRepository  repos = new RazasRepository(context);
 
-            return View(repos.GetAll().OrderBy(x=>x.Nombre).Where(x=>x.Eliminado==1));
+            return View(repos.GetAll().Where(x=>x.Eliminado==0));
         }
         public IActionResult Agregar()
         {
@@ -58,7 +58,7 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
                     }
                 }
                
-                Repository<Razas> repos = new Repository<Razas>(context);
+                RazasRepository repos = new RazasRepository(context);
                 
                 repos.Insert(vm.Raza);
                 if (vm.Archivo != null)
@@ -83,7 +83,7 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
         public IActionResult Editar(uint id)
         {
             InfoPerroViewModel vm = new InfoPerroViewModel();
-            Repository<Razas> repos = new Repository<Razas>(context);
+            RazasRepository repos = new RazasRepository(context);
             Repository<Paises> reposPaises = new Repository<Paises>(context);
             vm.Paises = reposPaises.GetAll();
             vm.Raza = repos.GetById(id);            
@@ -117,7 +117,7 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
             }
             try
             {
-                Repository<Razas> repos = new Repository<Razas>(context);
+                RazasRepository repos = new RazasRepository(context);
                 var original = repos.GetById(vm.Raza.Id);
                 if(original!=null)
                 {
@@ -161,33 +161,31 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
         
         public IActionResult Eliminar(uint id)
         {
-            Repository<Razas> repos = new Repository<Razas>(context);
-            InfoPerroViewModel raza = new InfoPerroViewModel();
-            raza.Raza = repos.GetById(id);
-            if (raza != null)
-                return  View(raza);
+            RazasRepository repos = new RazasRepository(context);
+            var razaBD = repos.GetById(id);
+            if (razaBD != null)
+                return  View(razaBD);
             else 
                 return RedirectToAction("Index", "Home");
            
         }
 
         [HttpPost]
-        public IActionResult Eliminar(InfoPerroViewModel vm)
+        public IActionResult Eliminar(Razas razatemp)
         {
             try
             {
-                Repository<Razas> repos = new Repository<Razas>(context);
-                InfoPerroViewModel temporal = new InfoPerroViewModel();
+                RazasRepository repos = new RazasRepository(context);
 
-                temporal.Raza = repos.GetById(vm.Raza.Id);
-                temporal.Raza.Eliminado = 0;
-                repos.Update(temporal.Raza);
+                var original = repos.GetById(razatemp.Id);
+                original.Eliminado = 1;
+                repos.Update(original);
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception error)
             {
                 ModelState.AddModelError("", error.Message);
-                return View(vm);
+                return View(razatemp);
             }            
         }
     }

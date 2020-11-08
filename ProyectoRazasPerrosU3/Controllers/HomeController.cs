@@ -27,7 +27,7 @@ namespace ProyectoRazasPerrosU3.Controllers
             IndexViewModel vm = new IndexViewModel
             {
                 Razas = id == null ? repos.GetRazas() : repos.GetRazasByLetraInicial(id),
-                LetrasIniciales = repos.GetLetrasIniciales()
+                LetrasIniciales = repos.GetLetrasIniciales().Distinct()
             };
             return View(vm);
         }
