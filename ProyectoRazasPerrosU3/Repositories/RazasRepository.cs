@@ -33,7 +33,7 @@ namespace ProyectoRazasPerrosU3.Repositories
 
         public IEnumerable<RazaViewModel> GetRazasByLetraInicial(string letra)
         {
-            return GetRazas().Where(x => x.Nombre.StartsWith(letra));
+            return GetRazas().Where(x => x.Nombre.ToUpper().StartsWith(letra));
         }
 
 
