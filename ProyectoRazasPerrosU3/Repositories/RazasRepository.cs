@@ -82,25 +82,29 @@ namespace ProyectoRazasPerrosU3.Repositories
             { throw new Exception("Debe indicar si existen otros nombres de la raza"); }
             if (string.IsNullOrEmpty(entidad.Descripcion))
             { throw new Exception("Debe ingresar la descripcion de la raza"); }
-            if (string.IsNullOrEmpty(entidad.IdPaisNavigation.Nombre))
-            { throw new Exception("Debe ingresar el nombre del pais de origen de la raza"); }
+            if (Context.Paises.Any(x=>x.Id==entidad.IdPais))
+            { throw new Exception("Debe seleccionar un pais de origen de la raza valido"); }
 
             if(entidad==null ||  entidad.PesoMax<=0)
-            { throw new Exception("Debe ingresar un peso valido para la raza"); }
+            { throw new Exception("Debe ingresar un peso maximo valido para la raza"); }
             if(entidad == null || entidad.AlturaMax <= 0)
-            { throw new Exception("Debe ingresar una altura valido para la raza"); }
-            if(entidad == null || entidad.EsperanzaVida <= 0)
+            { throw new Exception("Debe ingresar una altura maxima valido para la raza"); }
+            if (entidad == null || entidad.PesoMin <= 0)
+            { throw new Exception("Debe ingresar un peso minimo valido para la raza"); }
+            if (entidad == null || entidad.AlturaMin <= 0)
+            { throw new Exception("Debe ingresar una altura minima valido para la raza"); }
+            if (entidad == null || entidad.EsperanzaVida <= 0)
             { throw new Exception("Debe ingresar una esperanza de vida valida para la raza"); }
 
-            if (entidad.Estadisticasraza.NivelEnergia<0 || entidad.Estadisticasraza.NivelEnergia>10)
+            if (entidad.Estadisticasraza.NivelEnergia< 0 || entidad.Estadisticasraza.NivelEnergia>10)
             { throw new Exception("Debe ingresar un nivel de energia en un rango de 0 a 10"); }
-            if (entidad.Estadisticasraza.FacilidadEntrenamiento <= 0 || entidad.Estadisticasraza.FacilidadEntrenamiento > 10)
+            if (entidad.Estadisticasraza.FacilidadEntrenamiento <  0 || entidad.Estadisticasraza.FacilidadEntrenamiento > 10)
             { throw new Exception("Debe ingresar un nivel de entendimiento en un rango de 0 a 10"); }
-            if (entidad.Estadisticasraza.AmistadDesconocidos <= 0 || entidad.Estadisticasraza.AmistadDesconocidos > 10)
+            if (entidad.Estadisticasraza.AmistadDesconocidos < 0 || entidad.Estadisticasraza.AmistadDesconocidos > 10)
             { throw new Exception("Debe ingresar un nivel de amistad con desconocidos en un rango de 0 a 10"); }
-            if (entidad.Estadisticasraza.AmistadPerros <= 0 || entidad.Estadisticasraza.AmistadPerros > 10)
+            if (entidad.Estadisticasraza.AmistadPerros < 0 || entidad.Estadisticasraza.AmistadPerros > 10)
             { throw new Exception("Debe ingresar un nivel de amistad con perros en un rango de 0 a 10"); }
-            if (entidad.Estadisticasraza.NecesidadCepillado <= 0 || entidad.Estadisticasraza.NecesidadCepillado > 10)
+            if (entidad.Estadisticasraza.NecesidadCepillado < 0 || entidad.Estadisticasraza.NecesidadCepillado > 10)
             { throw new Exception("Debe ingresar un nivel de nesecidad de cepillado en un rango de 0 a 10"); }
 
 
