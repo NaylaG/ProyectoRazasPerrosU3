@@ -82,9 +82,9 @@ namespace ProyectoRazasPerrosU3.Repositories
             { throw new Exception("Debe indicar si existen otros nombres de la raza"); }
             if (string.IsNullOrEmpty(entidad.Descripcion))
             { throw new Exception("Debe ingresar la descripcion de la raza"); }                      
-            if(entidad==null ||  entidad.PesoMax<=entidad.PesoMin)
+            if(entidad==null ||  entidad.PesoMax<=0)
             { throw new Exception("Debe ingresar un peso maximo valido para la raza"); }
-            if(entidad == null || entidad.AlturaMax <= entidad.AlturaMin)
+            if(entidad == null || entidad.AlturaMax <= 0)
             { throw new Exception("Debe ingresar una altura maxima valido para la raza"); }
             if (entidad == null || entidad.PesoMin <= 0)
             { throw new Exception("Debe ingresar un peso minimo valido para la raza"); }
