@@ -28,7 +28,7 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
         {
             Repository<Razas> repos = new Repository<Razas>(context);
 
-            return View(repos.GetAll().OrderBy(x=>x.Nombre).Where(x=>x.Eliminado==0));
+            return View(repos.GetAll().OrderBy(x=>x.Nombre).Where(x=>x.Eliminado==1));
         }
         public IActionResult Agregar()
         {
@@ -180,7 +180,7 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
                 InfoPerroViewModel temporal = new InfoPerroViewModel();
 
                 temporal.Raza = repos.GetById(vm.Raza.Id);
-                temporal.Raza.Eliminado = 1;
+                temporal.Raza.Eliminado = 0;
                 repos.Update(temporal.Raza);
                 return RedirectToAction("Index", "Home");
             }
