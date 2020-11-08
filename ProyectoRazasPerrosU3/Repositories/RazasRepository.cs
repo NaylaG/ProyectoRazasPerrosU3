@@ -42,7 +42,7 @@ namespace ProyectoRazasPerrosU3.Repositories
         
             return Context.Razas
              .OrderBy(x => x.Nombre)
-             .Select(x => x.Nombre.First());
+             .Select(x => x.Nombre.ToUpper().First());
         }
 
         public Razas GetRazaByNombre(string nombre)
