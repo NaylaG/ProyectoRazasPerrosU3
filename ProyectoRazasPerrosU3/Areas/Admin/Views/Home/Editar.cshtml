@@ -35,7 +35,7 @@
         <label>Color:</label><input asp-for="Raza.Caracteristicasfisicas.Color" type="text" placeholder="Color" required />
         <label>Imagen:</label>
         <input type="file" id="fileUpload1" accept="image/jpg" onchange="mostrarImagen(this)" asp-for="Archivo"  />
-        <img id="imagePreview" src="~/imgs_perros/@(Model.Raza.Id)_0.jpg" alt="Vista previa de la imagen" />
+        <img id="imagePreview"  src="~/imgs_perros/@(Model.Raza.Id)_0.jpg" alt="Vista previa de la imagen" />
 
         <div class="botones">
             <p id="error">

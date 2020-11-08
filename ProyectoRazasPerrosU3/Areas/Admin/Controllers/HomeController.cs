@@ -72,7 +72,7 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
                 }
 
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home" , new { area = "Admin" });
             }
             catch (Exception error)
             {
@@ -94,7 +94,7 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
             vm.Raza = repos.GetById(id);            
             if (vm.Raza == null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
             }
             if (System.IO.File.Exists(Enviroment.WebRootPath + $"/imgs_perros/{vm.Raza.Id}_0.jpg"))
             {
@@ -152,7 +152,7 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
                     vm.Archivo.CopyTo(fs);
                     fs.Close();
                 }
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
 
             }
             catch (Exception error)
@@ -172,7 +172,7 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
             if (razaBD != null)
                 return  View(razaBD);
             else 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
            
         }
 
@@ -186,7 +186,7 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
                 var original = repos.GetById(razatemp.Id);
                 original.Eliminado = 1;
                 repos.Update(original);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
             }
             catch (Exception error)
             {

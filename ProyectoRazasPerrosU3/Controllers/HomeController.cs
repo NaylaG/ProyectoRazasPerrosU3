@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -56,8 +57,7 @@ namespace ProyectoRazasPerrosU3.Controllers
         }
         [Route("/RazasPorPais")]
         public IActionResult RazasPorPais()
-        {
-            sistem14_razasContext context = new sistem14_razasContext();
+        {            
             RazaViewModel vm = new RazaViewModel();
              vm.Paises= context.Paises.Include(x=>x.Razas).ToList();           
             return View(vm);

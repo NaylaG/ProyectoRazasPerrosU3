@@ -6,7 +6,7 @@
 <section class="nav">
     <h3>Razas por país</h3>
     <nav>
-        <a href="/Home/">Listado Alfabético de Razas</a>
+        <a href="/">Listado Alfabético de Razas</a>
     </nav>
 </section>
 
@@ -15,7 +15,7 @@
     {
         <h4>@item.Nombre</h4>
         <ul>
-            @foreach (var r in item.Razas)
+            @foreach (var r in item.Razas.Where(x => x.Eliminado == 0))
             {
                 <li>
                     <a href="/Raza/@r.Nombre.Replace(" ","-")">
