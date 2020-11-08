@@ -46,6 +46,8 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
                 if(vm.Archivo==null)
                 {
                     ModelState.AddModelError("", "Debe seleccionar una imagen para la raza");
+                    Repository<Paises> reposPaises = new Repository<Paises>(context);
+                    vm.Paises = reposPaises.GetAll();
                     return View(vm);
                 }
                 else
@@ -53,7 +55,8 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
                     if (vm.Archivo.ContentType != "image/jpeg" || vm.Archivo.Length > 1024 * 1024 * 2)
                     {
                         ModelState.AddModelError("", "Debe seleccionar un archivo jpg menor a 2MB");
-                      
+                        Repository<Paises> reposPaises = new Repository<Paises>(context);
+                        vm.Paises = reposPaises.GetAll();
                         return View(vm);
                     }
                 }
@@ -128,7 +131,7 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
                     original.PesoMax = vm.Raza.PesoMax;
                     original.EsperanzaVida = vm.Raza.EsperanzaVida;
                     original.Eliminado = vm.Raza.Eliminado;
-                    original.IdPaisNavigation.Nombre = vm.Raza.IdPaisNavigation.Nombre;
+                    original.IdPais = vm.Raza.IdPais;
                     original.Caracteristicasfisicas.Patas = vm.Raza.Caracteristicasfisicas.Patas;
                     original.Caracteristicasfisicas.Cola = vm.Raza.Caracteristicasfisicas.Cola;
                     original.Caracteristicasfisicas.Hocico = vm.Raza.Caracteristicasfisicas.Hocico;
@@ -139,6 +142,7 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
                     original.Estadisticasraza.EjercicioObligatorio = vm.Raza.Estadisticasraza.EjercicioObligatorio;
                     original.Estadisticasraza.AmistadDesconocidos = vm.Raza.Estadisticasraza.AmistadDesconocidos;
                     original.Estadisticasraza.NecesidadCepillado = vm.Raza.Estadisticasraza.NecesidadCepillado;
+                    repos.Update(original);
                 }
                 if(vm.Archivo!=null)
                 {

@@ -5,7 +5,7 @@
     <form method="post" asp-action="Editar" asp-area="Admin" asp-controller="Home" enctype="multipart/form-data">
     <h2>Editar</h2>
     <div class="razaAgregar">
-        <input type="hidden" id="Id" name="Id" />
+        <input type="hidden" id="Id"  asp-for="Raza.Id"/>
         <h3 class="subtitulo">Datos</h3>
         <label>Nombre:</label><input asp-for="Raza.Nombre" type="text" placeholder="Nombre" required />
         <label>Otros nombres:</label><input asp-for="Raza.OtrosNombres" type="text" placeholder="Otros Nombres" required />
