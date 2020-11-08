@@ -41,6 +41,7 @@ namespace ProyectoRazasPerrosU3.Repositories
         {
         
             return Context.Razas
+             .Where(x=>x.Eliminado==0)
              .OrderBy(x => x.Nombre)
              .Select(x => x.Nombre.ToUpper().First());
         }
