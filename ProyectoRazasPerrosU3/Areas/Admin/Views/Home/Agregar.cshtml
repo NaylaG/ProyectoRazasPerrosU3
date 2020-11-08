@@ -13,7 +13,7 @@
         <label>Descripcion:</label><textarea asp-for="Raza.Descripcion" placeholder="Descripcion" required></textarea>
         <label>País de Origen:</label>
         <select asp-for="Raza.IdPais" asp-items="@(new SelectList(Model.Paises, "Id", "Nombre"))" required="required">
-            <option selected="selected" value="" >-- Seleccionar país de origen --</option>
+            <option selected="selected" value="">-- Seleccionar país de origen --</option>
         </select>
         <label>Peso mínimo:</label>
         <input asp-for="Raza.PesoMin" type="number" placeholder="Peso Minimo" required />
@@ -31,6 +31,9 @@
         <input asp-for="Raza.Estadisticasraza.NivelEnergia" type="range" min="0" max="10" required />
         <label>Facilidad de Entrenamiento:</label>
         <input asp-for="Raza.Estadisticasraza.FacilidadEntrenamiento" type="range" min="0" max="10" required />
+        <label>Ejercicio Obligatorio:</label>
+        <input asp-for="Raza.Estadisticasraza.EjercicioObligatorio" type="range" min="0" max="10" required />
+
         <label>Amistad con Desconocidos:</label>
         <input asp-for="Raza.Estadisticasraza.AmistadDesconocidos" type="range" min="0" max="10" required />
         <label>Amistad con Perros:</label>

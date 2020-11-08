@@ -65,7 +65,7 @@ namespace ProyectoRazasPerrosU3.Repositories
             Random r = new Random();
             
             return Context.Razas
-                .Where(x => x.Nombre != nombre)
+                .Where(x => x.Nombre != nombre && x.Eliminado==0)
                 .ToList()
                 .OrderBy(x => r.Next())
                 .Take(4)
@@ -82,10 +82,10 @@ namespace ProyectoRazasPerrosU3.Repositories
             { throw new Exception("Debe indicar si existen otros nombres de la raza"); }
             if (string.IsNullOrEmpty(entidad.Descripcion))
             { throw new Exception("Debe ingresar la descripcion de la raza"); }                      
-            if(entidad==null ||  entidad.PesoMax<=0)
-            { throw new Exception("Debe ingresar un peso maximo valido para la raza"); }
-            if(entidad == null || entidad.AlturaMax <= 0)
-            { throw new Exception("Debe ingresar una altura maxima valido para la raza"); }
+            if(entidad==null ||  entidad.PesoMax<=entidad.PesoMin)
+            { throw new Exception("Debe ingresar un peso mayor al peso minimo de la raza"); }
+            if(entidad == null || entidad.AlturaMax <= entidad.AlturaMin)
+            { throw new Exception("Debe ingresar una altura mayor a la altura minima para la raza"); }
             if (entidad == null || entidad.PesoMin <= 0)
             { throw new Exception("Debe ingresar un peso minimo valido para la raza"); }
             if (entidad == null || entidad.AlturaMin <= 0)
@@ -97,6 +97,8 @@ namespace ProyectoRazasPerrosU3.Repositories
             { throw new Exception("Debe ingresar un nivel de energia en un rango de 0 a 10"); }
             if (entidad.Estadisticasraza.FacilidadEntrenamiento <  0 || entidad.Estadisticasraza.FacilidadEntrenamiento > 10)
             { throw new Exception("Debe ingresar un nivel de entendimiento en un rango de 0 a 10"); }
+            if (entidad.Estadisticasraza.EjercicioObligatorio < 0 || entidad.Estadisticasraza.EjercicioObligatorio > 10)
+            { throw new Exception("Debe ingresar ejercicio obligatorio en un rango de 0 a 10"); }
             if (entidad.Estadisticasraza.AmistadDesconocidos < 0 || entidad.Estadisticasraza.AmistadDesconocidos > 10)
             { throw new Exception("Debe ingresar un nivel de amistad con desconocidos en un rango de 0 a 10"); }
             if (entidad.Estadisticasraza.AmistadPerros < 0 || entidad.Estadisticasraza.AmistadPerros > 10)
