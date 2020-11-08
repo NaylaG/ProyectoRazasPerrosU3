@@ -76,6 +76,8 @@ namespace ProyectoRazasPerrosU3.Areas.Admin.Controllers
             }
             catch (Exception error)
             {
+                Repository<Paises> reposPaises = new Repository<Paises>(context);
+                vm.Paises = reposPaises.GetAll();
                 ModelState.AddModelError("",error.Message);
                 return View(vm);
             }
