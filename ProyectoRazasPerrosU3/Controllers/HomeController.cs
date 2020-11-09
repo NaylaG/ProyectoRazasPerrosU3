@@ -59,7 +59,9 @@ namespace ProyectoRazasPerrosU3.Controllers
         public IActionResult RazasPorPais()
         {            
             RazaViewModel vm = new RazaViewModel();
-             vm.Paises= context.Paises.Include(x=>x.Razas).ToList();           
+            RazasRepository repos = new RazasRepository(context);
+             //vm.Paises= context.Paises.Include(x=>x.Razas).ToList();           
+            vm.Paises = repos.RazasPorPais();
             return View(vm);
         }
     }

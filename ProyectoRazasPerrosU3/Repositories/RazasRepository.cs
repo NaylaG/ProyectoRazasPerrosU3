@@ -36,6 +36,10 @@ namespace ProyectoRazasPerrosU3.Repositories
             return GetRazas().Where(x => x.Nombre.ToUpper().StartsWith(letra));
         }
 
+        public IEnumerable<Paises> RazasPorPais()
+        {
+            return Context.Paises.Include(x => x.Razas.Where(x => x.Eliminado == 0)).OrderBy(x => x.Nombre);
+        }
 
         public IEnumerable<char> GetLetrasIniciales()
         {

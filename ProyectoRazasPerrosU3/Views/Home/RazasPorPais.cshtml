@@ -11,11 +11,12 @@
 </section>
 
 <section class="list">
-    @foreach (var item in Model.Paises.OrderBy(x=>x.Nombre))
+    @foreach (var item in Model.Paises)
     {
-        <h4>@(item.Razas==null? " " : item.Nombre)</h4>
+
+        <h4>@item.Nombre</h4>
         <ul>
-            @foreach (var r in item.Razas.Where(x => x.Eliminado == 0))
+            @foreach (var r in item.Razas)
             {
                 <li>
                     <a href="/Raza/@r.Nombre.Replace(" ","-")">
