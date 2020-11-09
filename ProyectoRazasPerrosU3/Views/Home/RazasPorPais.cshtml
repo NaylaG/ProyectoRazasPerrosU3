@@ -13,7 +13,7 @@
 <section class="list">
     @foreach (var item in Model.Paises.OrderBy(x=>x.Nombre))
     {
-        <h4>@item.Nombre</h4>
+        <h4>@(item.Razas==null? " " : item.Nombre)</h4>
         <ul>
             @foreach (var r in item.Razas.Where(x => x.Eliminado == 0))
             {
